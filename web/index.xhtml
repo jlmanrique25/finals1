@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition>
+   <table border="1">
+      <tr>
+         <td>#{functions.board.get(0)}</td>
+         <td>#{functions.board.get(1)}</td>
+         <td>#{functions.board.get(2)}</td>
+      </tr>
+      <tr>
+         <td>#{functions.board.get(3)}</td>
+         <td>#{functions.board.get(4)}</td>
+         <td>#{functions.board.get(5)}</td>
+      </tr>
+      <tr>
+         <td>#{functions.board.get(6)}</td>
+         <td>#{functions.board.get(7)}</td>
+         <td>#{functions.board.get(8)}</td>
+      </tr>
+      <tr>
+         <td>#{functions.move.move}</td>
+      </tr>
+   </table>
+   <h:form>
+      <h:outputLabel value="Your move" for="move"/>
+      <h:inputText value="#{functions.move.move}" id="move" validatorMessage="Only numbers 1-9 are accepted" required="true">
+         <f:validateRegex pattern="([1-9])"/>
+      </h:inputText>
+      <h:message for="move"/>
+      <h:commandButton value="submit" action="#{functions.main_method}"/>
+   </h:form>
+</ui:composition>
+</html>
