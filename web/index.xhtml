@@ -4,36 +4,60 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-<ui:composition>
-   <table border="1">
-      <tr>
-         <td>#{functions.board.get(0)}</td>
-         <td>#{functions.board.get(1)}</td>
-         <td>#{functions.board.get(2)}</td>
-      </tr>
-      <tr>
-         <td>#{functions.board.get(3)}</td>
-         <td>#{functions.board.get(4)}</td>
-         <td>#{functions.board.get(5)}</td>
-      </tr>
-      <tr>
-         <td>#{functions.board.get(6)}</td>
-         <td>#{functions.board.get(7)}</td>
-         <td>#{functions.board.get(8)}</td>
-      </tr>
-      <tr>
-         <td>#{functions.move.move}</td>
-      </tr>
-   </table>
-   <h:form>
-      <h:outputLabel value="Your move" for="move"/>
-      <h:inputText value="#{functions.move.move}" id="move" validatorMessage="Only numbers 1-9 are accepted" required="true">
-         <f:validateRegex pattern="([1-9])"/>
-      </h:inputText>
-      <h:message for="move"/>
-      <h:commandButton value="submit" action="#{functions.main_method}"/>
-   </h:form>
+<!--in case you forget the new solution is to move the board to the backend and have individual values for the cell so that everytime the board the called the cell is updated and not the board-->
+
+<ui:composition template="template.xhtml">
+   <ui:define name="content">
+      <div class="game--container">
+      <table border="1">
+         <tr>
+            <td class="cell">#{functions.board.get(0)}</td>
+            <td class="cell">#{functions.board.get(1)}</td>
+            <td class="cell">#{functions.board.get(2)}</td>
+         </tr>
+         <tr>
+            <td class="cell">#{functions.board.get(3)}</td>
+            <td class="cell">#{functions.board.get(4)}</td>
+            <td class="cell">#{functions.board.get(5)}</td>
+         </tr>
+         <tr>
+            <td class="cell">#{functions.board.get(6)}</td>
+            <td class="cell">#{functions.board.get(7)}</td>
+            <td class="cell">#{functions.board.get(8)}</td>
+         </tr>
+      </table>
+      </div>
+
+      <div class="move" align="center">
+         <h:form>
+            <h:outputLabel value="Your move" for="move"/>
+            <h:inputText value="#{functions.move.move}" id="move" validatorMessage="Only numbers 1-9 are accepted!" required="true">
+               <f:validateRegex pattern="([1-9])"/>
+            </h:inputText>
+            <h:message for="move"/>
+
+            <!--will only happen if the first user move has been inputed
+            <ui:fragment rendered="#{functions.board.contains('X') || functions.board.contains('O')}">
+               <c:set value="#{functions.board.get(0)}" target="#{functions.move.cell1}" property="#{functions.board.get(0)}"/>
+               <c:set value="#{functions.board.get(1)}" target="#{functions.move.cell2}" property="#{functions.board.get(1)}"/>
+               <c:set value="#{functions.board.get(2)}" target="#{functions.move.cell3}" property="#{functions.board.get(2)}"/>
+               <c:set value="#{functions.board.get(3)}" target="#{functions.move.cell4}" property="#{functions.board.get(3)}"/>
+               <c:set value="#{functions.board.get(4)}" target="#{functions.move.cell5}" property="#{functions.board.get(4)}"/>
+               <c:set value="#{functions.board.get(5)}" target="#{functions.move.cell6}" property="#{functions.board.get(5)}"/>
+               <c:set value="#{functions.board.get(6)}" target="#{functions.move.cell7}" property="#{functions.board.get(6)}"/>
+               <c:set value="#{functions.board.get(7)}" target="#{functions.move.cell8}" property="#{functions.board.get(7)}"/>
+               <c:set value="#{functions.board.get(8)}" target="#{functions.move.cell9}" property="#{functions.board.get(8)}"/>
+               This is a new board
+               The value of cell 1 should be #{functions.move.cell1}
+            </ui:fragment>
+            end of if else-->
+            <br /><br/>
+            <h:commandButton value="submit" action="#{functions.main_method}" class="game--restart"/>
+         </h:form>
+      </div>
+
+   </ui:define>
 </ui:composition>
 </html>
