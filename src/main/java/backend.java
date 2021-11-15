@@ -5,11 +5,17 @@ import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.util.*;
+import java.persistence.*;
 
 @ManagedBean
 @RequestScoped
 @Named
+
+@Entity
+@Table(name="TICTACTOE")
 public class backend{
+    
+    @Column(name="MOVE")
     private String move;
     private long board_id;
     private String cell1;
@@ -21,6 +27,10 @@ public class backend{
     private String cell7;
     private String cell8;
     private String cell9;
+    
+    public backend() {
+        
+    }
 
     public long getBoard_id() {
         return board_id;
